@@ -371,5 +371,5 @@ If no timeout value is specified, it will wait indefinitely for a response.
 - Default: ``False``
 
 The use case is when you are using a DFS API that asks for the url of a given 
-file to the server. In simple words, this does something like `MEDIA_URL + filename`, instead
-of asking to the server.
+file to the server. In simple words, this does something like `MEDIA_URL + filename`, rather than
+querying the server for the url.
