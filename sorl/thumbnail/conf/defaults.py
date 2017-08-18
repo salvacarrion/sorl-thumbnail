@@ -121,3 +121,7 @@ THUMBNAIL_FLATTEN = False
 # Whenever we will check an existing thumbnail exists and avoid to overwrite or not.
 # Set this to true if you have an slow .exists() implementation on your storage backend of choice.
 THUMBNAIL_FORCE_OVERWRITE = False
+
+# Returns the url of a given file using the MEDIA_URL instead of asking to the
+# server for that url.
+THUMBNAIL_FAST_URL = False

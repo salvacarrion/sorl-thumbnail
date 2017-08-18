@@ -6,7 +6,7 @@ import os
 import re
 
 from django.core.files.base import File, ContentFile
-from django.core.files.storage import Storage  # , default_storage
+from django.core.files.storage import Storage, FileSystemStorage  # , default_storage
 from django.utils.encoding import force_text
 from django.utils.functional import LazyObject, empty
 from sorl.thumbnail import default
@@ -99,6 +99,9 @@ class ImageFile(BaseImageFile):
         if self.name.startswith('//'):
             self.name = 'http:' + self.name
 
+        # Standard storage to work around DFS lag problems
+        self.standard_storage = FileSystemStorage()
+
         # figure out storage
         if storage is not None:
             self.storage = storage
@@ -156,7 +159,10 @@ class ImageFile(BaseImageFile):
 
     @property
     def url(self):
-        return self.storage.url(self.name)
+        if settings.THUMBNAIL_FAST_URL:
+            return self.standard_storage.url(self.name)
+        else:
+            return self.storage.url(self.name)
 
     def read(self):
         f = self.storage.open(self.name)

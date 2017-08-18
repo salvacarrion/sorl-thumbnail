@@ -364,3 +364,12 @@ that regex replaces references to images with thumbnails.
 
 This value sets the timeout value in seconds when retrieving a source image from a URL. 
 If no timeout value is specified, it will wait indefinitely for a response.
+
+``THUMBNAIL_FAST_URL``
+===================
+
+- Default: ``False``
+
+The use case is when you are using a DFS API that asks for the url of a given 
+file to the server. In simple words, this does something like `MEDIA_URL + filename`, instead
+of asking to the server.
